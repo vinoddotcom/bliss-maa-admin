@@ -19,9 +19,7 @@ export default async function handle(req, res) {
     },
   });
 
-console.log({method})
   if(method === "DELETE") {
-    console.log(req.query?.imageUrl)
     const imageUrl = req.query?.imageUrl;
     if(!imageUrl) return res.json({ statusCode: 401, message: "image url not found", success: false })
     const simplifiedKey = imageUrl.split('/').slice(3).join('/');
@@ -41,9 +39,6 @@ console.log({method})
       resolve({ fields, files });
     });
   });
-
-  console.log("length:", files.file.length);
-
 
   const links = [];
   for (const file of files.file) {

@@ -11,7 +11,7 @@ export default function OrdersPage() {
   }, []);
   return (
     <Layout>
-      <h1>Orders</h1>
+      <span className="text-2xl font-bold">Orders</span>
       <table className="basic">
         <thead>
           <tr>

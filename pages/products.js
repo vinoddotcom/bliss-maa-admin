@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { useRouter } from 'next/router';
 
 export default function Products() {
   const [products,setProducts] = useState([]);

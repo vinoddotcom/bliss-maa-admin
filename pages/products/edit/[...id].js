@@ -18,7 +18,7 @@ export default function EditProductPage() {
   }, [id]);
   return (
     <Layout>
-      <h1>Edit product</h1>
+      <span className="text-2xl font-bold">Edit product</span>
       {productInfo && (
         <ProductForm {...productInfo} />
       )}

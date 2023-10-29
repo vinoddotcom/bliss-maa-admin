@@ -95,7 +95,7 @@ function Categories({swal}) {
   }
   return (
     <Layout>
-      <h1>Categories</h1>
+      <span className="text-2xl font-bold">Categories</span>
       <label>
         {editedCategory
           ? `Edit category ${editedCategory.name}`
