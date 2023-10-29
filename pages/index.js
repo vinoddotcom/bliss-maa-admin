@@ -1,5 +1,6 @@
-import Layout from "@/components/Layout";
+import Layout from "../components/Layout.js";
 import {useSession} from "next-auth/react";
+import MenuBar from "../components/MenuBar.js"
 
 export default function Home() {
   const {data: session} = useSession();

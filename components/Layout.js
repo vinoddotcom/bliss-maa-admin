@@ -1,11 +1,16 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import Nav from "@/components/Nav";
-import {useState} from "react";
+import {useState , useEffect} from "react";
 import Logo from "@/components/Logo";
 
 export default function Layout({children}) {
   const [showNav,setShowNav] = useState(false);
   const { data: session } = useSession();
+
+  useEffect(() => {
+    console.log({session})
+  }, [session]);
+
   if (!session) {
     return (
       <div className="bg-bgGray w-screen h-screen flex items-center">

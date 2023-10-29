@@ -44,3 +44,77 @@ table.basic a{
 .btn-default{
     @apply bg-white text-gray-800 px-4 py-1 rounded-sm border border-gray-200 shadow-sm;
 }
+
+.editor {
+    border: 1px solid rgba(0, 0, 0, 0.12)
+  }
+  .editor__content .ProseMirror {
+    min-height: 200px;
+  }
+  .ProseMirror{
+    margin: 0 0;
+    padding: 5px 15px 5px 15px;
+    text-align: left;
+  }
+  
+  .ProseMirror > * + * {
+    margin-top: 0px;
+  }
+  .ProseMirror ul, .ProseMirror ol {
+    padding: 0 1rem;
+    margin-top: 0.75em;
+  }
+  .ProseMirror p {
+    margin-bottom: 0px;
+  }
+  
+  .ProseMirror p img {
+    display: initial;
+  }
+  
+  /*
+    Hack for break and next line
+    https://github.com/ueberdosis/tiptap/issues/412#issuecomment-593635371
+  */
+  .ProseMirror p:empty::after{
+    content: "\00A0";
+  }
+  
+  .ProseMirror h1, .ProseMirror h2, .ProseMirror h3, .ProseMirror h4 {
+    line-height: 1.1;
+  }
+
+  .tableWrapper {
+    overflow-x: auto;
+  }
+  .resize-cursor {
+    cursor: ew-resize;
+    cursor: col-resize;
+  }
+  ::v-deep .ProseMirror > * + * {
+    margin-top: 0.75em;
+  }
+  
+  .ProseMirror ol {
+    padding: 0 1rem;
+    list-style: decimal !important;
+  }
+  
+  .ProseMirror ul {
+    padding: 0 1rem;
+    list-style: disc !important;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
