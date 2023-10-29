@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ChevronDownIcon from "@heroicons/react/24/solid/ChevronDownIcon";
-import { Popover, PopoverButton, PopoverPanel, TransitionRoot } from "@headlessui/react";
+
 
 const EditorToolbar = ({ editor }) => {
   const [basicOperations, setBasicOperations] = useState([]);
+  const [html, setHtml] = useState("");
+  const [isPastHtml, setIsPastHtml] = useState(false);
+
 
   useEffect(() => {
     const updatedBasicOperations = [
@@ -126,11 +128,16 @@ const EditorToolbar = ({ editor }) => {
         isActive: () => false,
       },
       {
+        icon: `M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z`,
+        title: "Code",
+        action: () => setIsPastHtml(isPastHtml ? false : true),
+        isActive: () => isPastHtml,
+      },
+      {
         icon: `M6,5V5.18L8.82,8H11.22L10.5,9.68L12.6,11.78L14.21,8H20V5H6M3.27,5L2,6.27L8.97,13.24L6.5,19H9.5L11.07,
               15.34L16.73,21L18,19.73L3.55,5.27L3.27,5Z`,
         title: "Clear Format",
-        action: () => editor.chain().focus().clearNodes().unsetAllMarks()
-          .run(),
+        action: () => editor.chain().focus().clearNodes().unsetAllMarks().run(),
         isActive: () => false,
       },
 
@@ -152,9 +159,20 @@ const EditorToolbar = ({ editor }) => {
         action: () => editor.chain().focus().toggleSubscript().run(),
         isActive: () => false,
       },
-    ]
+    ];
     setBasicOperations(updatedBasicOperations);
-  }, [editor]);
+  }, [editor, isPastHtml]);
+
+  function setDescription() {
+    console.log(html)
+    editor.commands.insertContentAt(editor.getCharacterCount() + 2, html, {
+      updateSelection: true,
+      parseOptions: {
+        preserveWhitespace: "full",
+      },
+    });
+    setHtml("");
+  }
 
   return (
     <div className="flex justify-center items-center flex-wrap outline outline-1 outline-[#D3D3D3] bg-[#F6F6F6] dark:bg-dark-primary-1 py-2.5 px-0 dark:outline-dark-text-2">
@@ -164,19 +182,39 @@ const EditorToolbar = ({ editor }) => {
           id="editorIcons"
           key={key}
           tabIndex="0"
-          className={`${item.isActive() ? 'text-blue-800' : ''} mr-3 cursor-pointer`}
+          className={`${
+            item.isActive() ? "text-blue-800" : ""
+          } mr-3 cursor-pointer`}
           title={item.title}
           onClick={item.action}
         >
           <abbr title={item.title}>
             <svg viewBox="0 0 24 24" className="h-[24px] w-[24px]">
-              <path fill={item.isActive() ? '#1565C0' : '#999999'} d={item.icon} />
+              <path
+                fill={item.isActive() ? "#1565C0" : "#999999"}
+                d={item.icon}
+              />
             </svg>
           </abbr>
         </div>
       ))}
+      {isPastHtml && <div className="flex w-full -mb-2">
+        <textarea
+          className="h-11 -mb-1 w-full"
+          placeholder="Past your html here"
+          value={html}
+          onChange={(ev) => setHtml(ev.target.value)}
+        />
+        <button
+          type="button"
+          className="bg-primary text-white px-4 py-2 border border-primary h-full min-w-fit"
+          onClick={setDescription}
+        >
+          Insert html
+        </button>
+      </div>}
     </div>
   );
- }
+};
 
- export default EditorToolbar
+export default EditorToolbar;
