@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout";
+import axios from "axios";
 import Link from "next/link";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import { useRouter } from 'next/router';
 
 export default function Products() {
@@ -11,6 +11,7 @@ export default function Products() {
       setProducts(response.data);
     });
   }, []);
+  
   return (
     <Layout>
       <Link className="btn-primary" href={'/products/new'}>Add new product</Link>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { withSwal } from 'react-sweetalert2';
 
 function Categories({swal}) {
+
   const [editedCategory, setEditedCategory] = useState(null);
   const [name,setName] = useState('');
   const [parentCategory,setParentCategory] = useState('');
@@ -50,6 +51,7 @@ function Categories({swal}) {
     }))
     );
   }
+
   function deleteCategory(category){
     swal.fire({
       title: 'Are you sure?',
@@ -67,6 +69,7 @@ function Categories({swal}) {
       }
     });
   }
+
   function addProperty() {
     setProperties(prev => {
       return [...prev, {name:'',values:''}];
