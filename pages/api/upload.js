@@ -4,7 +4,7 @@ import fs from "fs";
 import mime from "mime-types";
 import { mongooseConnect } from "@/lib/mongoose";
 import { isAdminRequest } from "@/pages/api/auth/[...nextauth]";
-const bucketName = "essentail-oil";
+const bucketName = "essential-oil-images";
 
 export default async function handle(req, res) {
    const { method } = req;
@@ -12,7 +12,7 @@ export default async function handle(req, res) {
   await isAdminRequest(req, res);
 
   const client = new S3Client({
-    region: "ap-south-1",
+    region: "eu-central-1",
     credentials: {
       accessKeyId: process.env.S3_ACCESS_KEY,
       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
@@ -49,7 +49,6 @@ export default async function handle(req, res) {
         Bucket: bucketName,
         Key: newFilename,
         Body: fs.readFileSync(file.path),
-        ACL: "public-read",
         ContentType: mime.lookup(file.path),
       })
     );
