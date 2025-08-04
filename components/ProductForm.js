@@ -14,6 +14,11 @@ export default function ProductForm({
   images: existingImages,
   category: assignedCategory,
   properties: assignedProperties,
+  slug: existingSlug,
+  metaTitle: existingMetaTitle,
+  metaDescription: existingMetaDescription,
+  keywords: existingKeywords,
+  shortDescription: existingShortDescription,
 }) {
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
@@ -23,6 +28,11 @@ export default function ProductForm({
   );
   const [purpose, setPurpose] = useState(existingPrice || "");
   const [images, setImages] = useState(existingImages || []);
+  const [slug, setSlug] = useState(existingSlug || "");
+  const [metaTitle, setMetaTitle] = useState(existingMetaTitle || "");
+  const [metaDescription, setMetaDescription] = useState(existingMetaDescription || "");
+  const [keywords, setKeywords] = useState(existingKeywords || []);
+  const [shortDescription, setShortDescription] = useState(existingShortDescription || "");
   const [goToProducts, setGoToProducts] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -41,6 +51,11 @@ export default function ProductForm({
       images,
       category,
       properties: productProperties,
+      slug,
+      metaTitle,
+      metaDescription,
+      keywords,
+      shortDescription,
     };
     if (_id) {
       //update
@@ -200,6 +215,49 @@ export default function ProductForm({
           value={purpose}
           onChange={ev => setPurpose(ev.target.value)}
         /> */}
+      <h2 className="text-xl font-semibold mt-6 mb-2">SEO Settings</h2>
+      
+      <label>URL Slug (required and unique)</label>
+      <input
+        type="text"
+        placeholder="product-url-slug"
+        value={slug}
+        onChange={(ev) => setSlug(ev.target.value)}
+        required
+      />
+
+      <label>Short Description</label>
+      <textarea
+        placeholder="Brief product description for listings"
+        value={shortDescription}
+        onChange={(ev) => setShortDescription(ev.target.value)}
+        rows={2}
+      />
+
+      <label>Meta Title</label>
+      <input
+        type="text"
+        placeholder="Meta title for SEO"
+        value={metaTitle}
+        onChange={(ev) => setMetaTitle(ev.target.value)}
+      />
+
+      <label>Meta Description</label>
+      <textarea
+        placeholder="Meta description for SEO"
+        value={metaDescription}
+        onChange={(ev) => setMetaDescription(ev.target.value)}
+        rows={3}
+      />
+
+      <label>Keywords (comma separated)</label>
+      <input
+        type="text"
+        placeholder="keyword1, keyword2, keyword3"
+        value={keywords.join(", ")}
+        onChange={(ev) => setKeywords(ev.target.value.split(",").map(k => k.trim()))}
+      />
+
       <button type="submit" className="btn-primary">
         Save
       </button>

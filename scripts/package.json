@@ -1,0 +1,16 @@
+{
+  "name": "product-update-script",
+  "version": "1.0.0",
+  "description": "Script to update products with new images and SEO fields",
+  "main": "updateProducts.js",
+  "scripts": {
+    "start": "node updateProducts.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "mongoose": "^7.0.0",
+    "openai": "^4.20.1",
+    "axios": "^1.6.8",
+    "aws-sdk": "^2.1564.0"
+  }
+}

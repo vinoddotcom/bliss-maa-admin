@@ -7,6 +7,13 @@ const ProductSchema = new Schema({
   images: [{type:String}],
   category: {type:mongoose.Types.ObjectId, ref:'Category'},
   properties: {type:Object},
+
+    // 🚀 SEO fields
+  slug: { type: String, required: true, unique: true },
+  metaTitle: { type: String },
+  metaDescription: { type: String },
+  keywords: [{ type: String }],
+  shortDescription: { type: String },
 }, {
   timestamps: true,
 });
